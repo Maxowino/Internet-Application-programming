@@ -24,6 +24,8 @@ require_once "user_details.php";
     $Objheading=new headings();
     $Objmenus=new menus();
     $Objlayout = new layout();
+    $ObjCont = new content();
+
 
 
 // $Obj = new user_details();
