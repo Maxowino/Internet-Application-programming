@@ -10,8 +10,9 @@
         <?php
         require_once "load.php";
         
-        $Objmenus->main_menu();
+        
         $Objlayout->heading();
+        $Objmenus->main_menu();
         $Objheading->main_heading();
         $ObjCont->main_content();
         $ObjCont->side_bar();

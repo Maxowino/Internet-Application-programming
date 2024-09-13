@@ -3,10 +3,10 @@
         public function main_menu(){
 ?>  
             <div class="topnav">
-                <a href="HOME">Home</a>
-                <a href="ABOUT">About</a>
-                <a href="ABOUT">Projects</a>
-                <a href="ABOUT">Contact</a>
+                <a href="./">Home</a>
+                <a href="about.php">About</a>
+                <a href="">Projects</a>
+                <a href="">Contact</a>
                 <?php $this->main_right_menu();?>
             </div>
             <?php

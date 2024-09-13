@@ -21,10 +21,15 @@ require_once "user_details.php";
 // require_once "headings/headings.php";
 
 //create class instance
-    $Objheading=new headings();
+     $Objlayout = new layout();
     $Objmenus=new menus();
-    $Objlayout = new layout();
+    $Objheading=new headings();
     $ObjCont = new content();
+
+    require "includes/constants.php";
+    require "includes/dbconnection.php";
+
+    $conn = new dbconnection(DBTYPE,HOSTNAME,DBPORT,HOSTUSER,HOSTPASS,DBNAME);
 
 
 
