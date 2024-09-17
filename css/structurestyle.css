@@ -1,5 +1,5 @@
 body{
-    /* background-color: black; */
+    background-color: grey;
     margin: 0;
 }
 *{
@@ -8,6 +8,7 @@ body{
 .topnav{
     background-color: black;
     overflow: hidden;
+    tab-size: 20%;
 
 }
 .topnav a{
@@ -31,4 +32,8 @@ body{
     padding: 20px;
     text-align: center;
     color: aliceblue;
+}
+
+body.sign{
+    background-color:grey;
 }

@@ -12,7 +12,8 @@ $Objmenus->main_menu();
         <title>User Sign-Up and Display</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
-    <body>
+    <body class="sign">
+
         <div class="container mt-5">
             <!-- Sign Up Form -->
             <div class="row">
@@ -39,6 +40,8 @@ $Objmenus->main_menu();
                     </form>
                 </div>
             </div>
+        </div>
+        
             <?
     
             

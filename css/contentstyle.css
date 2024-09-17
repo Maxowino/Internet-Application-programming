@@ -1,5 +1,5 @@
 .banner{
-    background-color:white;
+    background-color:grey;
     margin-left: 45%;    
 }
 .row::after{
@@ -17,4 +17,7 @@
     width: 33.33%;
     padding: 15px;
 
+}
+.sign{
+    background-color: aquamarine;
 }
