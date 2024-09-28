@@ -20,8 +20,8 @@
                    
                         <!-- Email input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="email" id="form2Example1" class="form-control" />
-                            <label class="form-label" for="form2Example1">Email address</label>
+                            <input type="email" id="email" class="form-control" />
+                            <label class="form-label" for="email">Email address</label>
                         </div>
 
                         <!-- Password input -->
