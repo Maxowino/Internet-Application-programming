@@ -26,6 +26,7 @@ require_once "user_details.php";
     $Objheading=new headings();
     $ObjCont = new content();
     
+    
 
     require "includes/constants.php";
     require "includes/dbconnection.php";
