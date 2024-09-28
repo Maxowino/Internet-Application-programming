@@ -1,8 +1,5 @@
 <?php
-require "load.php";
 
-$Objlayout->heading();
-$Objmenus->main_menu();
 ?>
     <!DOCTYPE html>
     <html lang="en">
