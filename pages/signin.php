@@ -33,7 +33,11 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
+                        <div class="text-center">
+                            <p>Already have an account <a href="login.php">Login</a></p>
+                            
                         <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </div>
                     </form>
                 </div>
             </div>
