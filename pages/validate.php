@@ -1,6 +1,6 @@
 <?php
 
-require "load.php";
+// require "load.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input
     if (empty($email) || empty($password)) {
-        echo "Email and password are required.";
+        echo "Email or password not filled in.";
         exit();
     }
 

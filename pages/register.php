@@ -1,6 +1,10 @@
 <?php
 // Load the database connection and constants
-require "load.php";
+// require "load.php";
+    require "includes/constants.php";
+    require "includes/dbconnection.php";
+
+    $conn = new dbconnection(DBTYPE,HOSTNAME,DBPORT,HOSTUSER,HOSTPASS,DBNAME);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

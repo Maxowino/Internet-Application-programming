@@ -1,6 +1,6 @@
 <?php
 // Load the database connection and constants
-require "load.php";
+// require "load.php";
 
 // Get the user ID from the URL
 ?>

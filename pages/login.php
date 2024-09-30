@@ -13,19 +13,19 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h2 class="text-center">Sign In</h2>
+                <h2 class="text-center">Log In</h2>
                 <form method="POST" action="validate.php">
                      <!-- Email input -->
                      <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label" for="email">Email address</label>
-                            <input type="email" id="email" class="form-control" />
+                            <input type="email" id="email" class="form-control" name="email" required>
                             
                     </div>
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" id="password" class="form-control" />
+                            <input type="password" id="password" class="form-control" name="password" required>
                             
                         </div>
 
