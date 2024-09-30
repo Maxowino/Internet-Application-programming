@@ -17,14 +17,16 @@
                 <form method="POST" action="validate.php">
                      <!-- Email input -->
                      <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="email" id="email" class="form-control" />
                             <label class="form-label" for="email">Email address</label>
+                            <input type="email" id="email" class="form-control" />
+                            
                     </div>
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="password" id="password" class="form-control" />
                             <label class="form-label" for="password">Password</label>
+                            <input type="password" id="password" class="form-control" />
+                            
                         </div>
 
                         <!-- 2 column grid layout for inline styling -->
@@ -42,13 +44,9 @@
                             <a href="#!">Forgot password?</a>
                             </div>
                         </div>
-
-                        <!-- Submit button -->
-                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Log in</button>
-
                         <!-- Register buttons -->
                         <div class="text-center">
-                            <p>Not yet registered? <a href="signin.php">Register</a></p>
+                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Log in</button><p>Not yet registered? <a href="signin.php">Register</a></p>
                             <p>or Log-in with:</p>
                             <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
                             <i class="bi bi-facebook"></i>
