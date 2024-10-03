@@ -46,7 +46,7 @@
                         </div>
                         <!-- Register buttons -->
                         <div class="text-center">
-                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Log in</button><p>Not yet registered? <a href="signin.php">Register</a></p>
+                            <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Log in</button><p>Not yet registered? <a href="signin.php">Register</a></p>
                             <p>or Log-in with:</p>
                             <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
                             <i class="bi bi-facebook"></i>
