@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Body    = "Your verification code is: <strong>$verification_code</strong>";
         $mail->AltBody = "Your verification code is: $verification_code"; // For non-HTML mail clients
         
-        $mail->SMTPDebug = 0;  // Set to 0 to disable debugging, or 2 for verbose output
+        $mail->SMTPDebug = 0;  
         $mail->send();                                        // Send the email
 
         // Insert new user into the database
