@@ -38,19 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Port       = 587;                              // TCP port to connect to
 
         // Recipients
-        $mail->setFrom('application@gmail.com', 'Your App'); // Update sender name as appropriate
-        $mail->addAddress($email);                            // Add a recipient
+        $mail->setFrom('application@gmail.com', 'Task App'); 
+        $mail->addAddress($email);                            
 
         // Content
         $mail->isHTML(true);                                  
         $mail->Subject = 'Email Verification Code';
         $mail->Body    = "Your verification code is: <strong>$verification_code</strong>";
-        $mail->AltBody = "Your verification code is: $verification_code"; // For non-HTML mail clients
+        $mail->AltBody = "Your verification code is: $verification_code"; 
         
         $mail->SMTPDebug = 0;  
         $mail->send();                                        // Send the email
 
-        // Insert new user into the database
+        //hashing password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $conn = new dbconnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 
