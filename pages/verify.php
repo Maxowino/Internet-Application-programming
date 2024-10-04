@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-// Include database connection
-require "../load.php"; // Adjust the path as necessary
+require "../load.php"; 
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -11,14 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the code matches the one sent
     if (isset($_SESSION['verification_code']) && $entered_code == $_SESSION['verification_code']) {
         $email = $_SESSION['email'];
-
-        // Here, you would complete the user registration in the database
-        echo "Registration successful! You can now log in.";
+        
         // Unset session variables
         unset($_SESSION['verification_code']);
         unset($_SESSION['email']);
         
-        // Optionally redirect to login page
+        // Redirect to login page
         header('Location: login.php');
         exit();
     } else {
@@ -41,18 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-6 offset-md-3">
                 <h2 class="text-center">Verify Code</h2>
                 <?php if (isset($error_message)) echo "<div class='alert alert-danger'>$error_message</div>"; ?>
-                <form method="POST" action="">
-                    <!-- Verification code input -->
+                <form id="verificationForm" method="POST" action="">
                     <div class="mb-4">
                         <label class="form-label" for="code">Verification Code</label>
                         <input type="text" id="code" class="form-control" name="code" required>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-block mb-4">Verify</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-4" >Verify</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
