@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Generate a random verification code
     $verification_code = mt_rand(100000, 999999);
     $_SESSION['verification_code'] = $verification_code; // Store it in session
-    $_SESSION['email'] = $email; // Store email for later use
+    $_SESSION['email'] = $email; 
 
     // Send verification email using PHPMailer
     $mail = new PHPMailer(true);
@@ -32,17 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();                                        // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                 // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                             // Enable SMTP authentication
-        $mail->Username   = 'mxwellowino27@gmail.com';        // SMTP username
-        $mail->Password   = 'your-app-password';              // Use your App Password here
+        $mail->Username   = 'app036965@gmail.com';        // SMTP username
+        $mail->Password   = 'qrno xmit thwa pqbr';              // Use your App Password here
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
         $mail->Port       = 587;                              // TCP port to connect to
 
         // Recipients
-        $mail->setFrom('mxwellowino27@gmail.com', 'Your Name'); // Update sender name as appropriate
+        $mail->setFrom('application@gmail.com', 'Your App'); // Update sender name as appropriate
         $mail->addAddress($email);                            // Add a recipient
 
         // Content
-        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->isHTML(true);                                  
         $mail->Subject = 'Email Verification Code';
         $mail->Body    = "Your verification code is: <strong>$verification_code</strong>";
         $mail->AltBody = "Your verification code is: $verification_code"; // For non-HTML mail clients
