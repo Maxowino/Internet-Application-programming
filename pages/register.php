@@ -52,13 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->isSMTP();                                        // Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                 // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                             // Enable SMTP authentication
-            $mail->Username   = 'registration@gmail.com';           // SMTP username
-            $mail->Password   = 'your-password';                  // SMTP password
+            $mail->Username   = 'mxwellowino27@gmail.com';        // SMTP username
+            $mail->Password   = 'your-app-password';              // Use your App Password here
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
             $mail->Port       = 587;                              // TCP port to connect to
 
             // Recipients
-            $mail->setFrom('your-email@gmail.com', 'Mailer');
+            $mail->setFrom('mxwellowino27@gmail.com', 'Your Name'); // Update sender name as appropriate
             $mail->addAddress($email);                            // Add a recipient
 
             // Content
@@ -66,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Subject = 'Email Verification Code';
             $mail->Body    = "Your verification code is: <strong>$verification_code</strong>";
             $mail->AltBody = "Your verification code is: $verification_code"; // For non-HTML mail clients
-
+            
+            $mail->SMTPDebug = 2;  // Set to 0 to disable debugging, or 2 for verbose output
             $mail->send();                                        // Send the email
             header('Location: verify.php');                       // Redirect to verification page
             exit();
