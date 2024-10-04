@@ -1,12 +1,14 @@
 <?php
 // Load the database connection and constants
-require "../load.php";
+require "../load.php"; 
+require '../vendor/autoload.php'; // Include PHPMailer's autoloader
 
-    
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
@@ -18,37 +20,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    
-
+    // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    
     $conn = new dbconnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 
     try {
-        
         $connection = $conn->getConnection();
 
-        if (DBTYPE === 'PDO') {
-            
-            $stmt = $connection->prepare("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$first_name, $last_name, $email, $hashed_password]);
-            // $user_id = $connection->lastInsertId();
-
-        } elseif (DBTYPE === 'MySQLi') {
-            
-            $stmt = $connection->prepare("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $first_name, $last_name, $email, $hashed_password);
-            $stmt->execute();
-
-            
-            $user_id = $connection->insert_id;
+        // Check if email already exists
+        $stmt = $connection->prepare("SELECT * FROM user WHERE email = ?");
+        $stmt->execute([$email]);
+        if ($stmt->fetch()) {
+            echo "Email already exists!";
+            exit();
         }
 
-        
-        header("Location: userdetail.php?id=" . $user_id);
-        exit();
+        // Insert new user
+        $stmt = $connection->prepare("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$first_name, $last_name, $email, $hashed_password]);
 
+        // Generate a random verification code
+        $verification_code = mt_rand(100000, 999999);
+        $_SESSION['verification_code'] = $verification_code; // Store it in session
+        $_SESSION['email'] = $email; // Store email for later use
+
+        // Send verification email using PHPMailer
+        $mail = new PHPMailer(true);
+        try {
+            // Server settings
+            $mail->isSMTP();                                        // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                 // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                             // Enable SMTP authentication
+            $mail->Username   = 'registration@gmail.com';           // SMTP username
+            $mail->Password   = 'your-password';                  // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+            $mail->Port       = 587;                              // TCP port to connect to
+
+            // Recipients
+            $mail->setFrom('your-email@gmail.com', 'Mailer');
+            $mail->addAddress($email);                            // Add a recipient
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Email Verification Code';
+            $mail->Body    = "Your verification code is: <strong>$verification_code</strong>";
+            $mail->AltBody = "Your verification code is: $verification_code"; // For non-HTML mail clients
+
+            $mail->send();                                        // Send the email
+            header('Location: verify.php');                       // Redirect to verification page
+            exit();
+        } catch (Exception $e) {
+            echo "Error sending email: {$mail->ErrorInfo}";
+        }
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }

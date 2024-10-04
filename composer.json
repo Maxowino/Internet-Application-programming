@@ -1,0 +1,16 @@
+{
+    "name": "max/internet-application-programming",
+    "description": "composer require phpmailer/phpmailer",
+    "autoload": {
+        "psr-4": {
+            "Max\\InternetApplicationProgramming\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Maxowino",
+            "email": "maxwellowino27@gmail.com"
+        }
+    ],
+    "require": {}
+}

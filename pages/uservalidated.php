@@ -29,66 +29,74 @@ if (isset($_GET['id'])) {
             // Display the user's details in a table
             ?>
             <!doctype html>
-                            <html lang="en">
-                            <head>
-                                <meta charset="utf-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1">
-                                <title>User Details</title>
-                                
-                                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-                            </head>
-                            <body>
-                                <div class="container mt-5">
-                                    <h1>User Details</h1>
-                                    <table class="table table-striped table-bordered">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><strong>First Name</strong></td>
-                                                <td><?php echo htmlspecialchars($user['first_name']); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Last Name</strong></td>
-                                                <td><?php echo htmlspecialchars($user['last_name']); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Email</strong></td>
-                                                <td><?php echo htmlspecialchars($user['email']); ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                
-                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-                            </body>
-                            </html>
-                            <?php
+            <html lang="en">
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>User Details</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+            </head>
+            <body>
+                <div class="container mt-5">
+                    <h1 class="text-center">User Details</h1>
+                    <table class="table table-striped table-bordered mt-4">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Field</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>First Name</strong></td>
+                                <td><?php echo htmlspecialchars($user['first_name']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Name</strong></td>
+                                <td><?php echo htmlspecialchars($user['last_name']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center mt-4">
+                        <a href="login.php" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+            </body>
+            </html>
+            <?php
         } else {
             // If user not found
             ?>
-            <div class='container mt-5'>
-                <p class='alert alert-warning'>User not found.</p>
+            <div class="container mt-5">
+                <p class="alert alert-warning">User not found.</p>
+                <div class="text-center mt-4">
+                    <a href="login.php" class="btn btn-danger">Logout</a>
+                </div>
             </div>
             <?php
         }
     } catch (Exception $e) {
         // If there is an error
         ?>
-        <div class='container mt-5'>
-            <p class='alert alert-danger'>Error: <?php echo $e->getMessage(); ?></p>
+        <div class="container mt-5">
+            <p class="alert alert-danger">Error: <?php echo $e->getMessage(); ?></p>
         </div>
         <?php
     }
 } else {
     // If no user ID is provided
     ?>
-    <div class='container mt-5'>
-        <p class='alert alert-warning'>No user ID provided.</p>
+    <div class="container mt-5">
+        <p class="alert alert-warning">No user ID provided.</p>
+        <div class="text-center mt-4">
+            <a href="login.php" class="btn btn-danger">Logout</a>
+        </div>
     </div>
     <?php
 }
