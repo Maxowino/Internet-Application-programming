@@ -1,4 +1,5 @@
 <?php
+require "../load.php";
 
 ?>
 <!DOCTYPE html>
