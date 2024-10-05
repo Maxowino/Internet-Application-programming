@@ -58,6 +58,7 @@ if (isset($_GET['id'])) {
                     <div class="success-message" id="success-message"><?php echo $_SESSION['success_message']; ?></div>
                     <?php unset($_SESSION['success_message']);?>
                     <script>
+                        //function to remove the message after 2sec
                             window.onload = function() {
                                 const message = document.getElementById('success-message');
                                 if (message) {

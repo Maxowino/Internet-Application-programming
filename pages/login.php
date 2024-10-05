@@ -95,13 +95,13 @@ require "../load.php";
                             </div>
                         </div>
                         <div class="col">
-                            <a href="#!">Forgot password?</a>
+                            <span style="color:blue">Forgot Password</span>
                         </div>
                     </div>
                     
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
-                        <p>Not yet registered? <a href="signin.php">Register</a></p>
+                        <p>Not yet registered? <span id="registerText" style="color: blue; cursor: pointer; text-decoration:none;">Register</span></p>
                         <p>or Log-in with:</p>
                         <button type="button" class="btn btn-link btn-floating mx-1">
                             <i class="bi bi-facebook"></i>
@@ -144,6 +144,10 @@ require "../load.php";
         loginForm.addEventListener('submit', function () {
             loadingSpinner.style.display = 'block'; 
         });
+    const registerText = document.getElementById('registerText');
+    registerText.addEventListener('click', function() {
+        window.location.href = 'signin.php'; 
+    });
         
     </script>
 </body>

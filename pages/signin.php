@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <p>Already have an account <a href="login.php">Login</a></p>
+                        <p>Already have an account?<span id="loginText" style="color: blue; cursor: pointer; text-decoration:none;">Login</span></p>
                         <button type="submit" class="btn btn-primary">Sign Up</button>
                     </div>
                 </form>
@@ -105,6 +105,11 @@
             eyeIcon.classList.toggle('bi-eye');
             eyeIcon.classList.toggle('bi-eye-slash');
         });
+        const loginTextText = document.getElementById('loginText');
+    loginText.addEventListener('click', function() {
+        window.location.href = 'login.php'; 
+    });
+        
     </script>
 </body>
 </html>
