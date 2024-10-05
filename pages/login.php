@@ -1,6 +1,8 @@
 <?php
+session_start(); // Start the session to access session variables
 require "../load.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +14,7 @@ require "../load.php";
 
     <style>
         .form-container {
-            background-color:burlywood; 
+            background-color: burlywood; 
             padding: 30px; 
             border-radius: 8px; 
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
@@ -21,38 +23,44 @@ require "../load.php";
             cursor: pointer;
             color: black; 
         }
-        .topnav{
-        background-color: black;
-        overflow: hidden;
-        tab-size: 20%;
-
-            }
-            .topnav a{
-                color:azure;
-                float: left;
-                display: block;
-                text-decoration: none;
-                text-align: left;
-                padding: 14px 16px;
-            }
-            .topnav a:hover{
-                color: whitesmoke;
-
-            }
-            .topnav-right{
-                float: right;
-                text-align: right;
-
-            }
-            body{
-                background-color: azure;
-            }
+        .topnav {
+            background-color: black;
+            overflow: hidden;
+        }
+        .topnav a {
+            color: azure;
+            float: left;
+            display: block;
+            text-decoration: none;
+            text-align: left;
+            padding: 14px 16px;
+        }
+        .topnav a:hover {
+            color: whitesmoke;
+        }
+        .topnav-right {
+            float: right;
+            text-align: right;
+        }
+        body {
+            background-color: azure;
+        }
+        /* Loading spinner styles */
+        #loadingSpinner {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: 5s;
+        }
     </style>
     <div class="topnav">
-                <a href="../index.php">Home</a>
-                <a href="../about.php">About</a>
-                <a href="">Projects</a>
-                <a href="">Contact</a>
+        <a href="../index.php">Home</a>
+        <a href="../about.php">About</a>
+        <a href="">Projects</a>
+        <a href="">Contact</a>
     </div>
 </head>
 <body class="sign">
@@ -60,7 +68,11 @@ require "../load.php";
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2 class="text-center">Log In</h2>
-                <form method="POST" action="validate.php">
+                <?php if (isset($_SESSION['error_message'])): ?>
+                    <div class="alert alert-danger"><?php echo $_SESSION['error_message']; ?></div>
+                    <?php unset($_SESSION['error_message']); ?>
+                <?php endif; ?>
+                <form id="loginForm" method="POST" action="validate.php">
                     <div class="form-outline mb-4">
                         <label class="form-label" for="email">Email address</label>
                         <input type="email" id="email" class="form-control" name="email" required>
@@ -87,7 +99,7 @@ require "../load.php";
                             <a href="#!">Forgot password?</a>
                         </div>
                     </div>
-                    <!-- Register buttons and icons -->
+                    
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
                         <p>Not yet registered? <a href="signin.php">Register</a></p>
@@ -107,6 +119,13 @@ require "../load.php";
         </div>
     </div>
 
+   
+    <div id="loadingSpinner" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
     <script>
         // Toggle password visibility
         const togglePassword = document.getElementById('togglePassword');
@@ -118,6 +137,14 @@ require "../load.php";
             passwordInput.setAttribute('type', type);
             eyeIcon.classList.toggle('bi-eye');
             eyeIcon.classList.toggle('bi-eye-slash');
+        });
+
+        // Show loading 
+        const loginForm = document.getElementById('loginForm');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        loginForm.addEventListener('submit', function () {
+            loadingSpinner.style.display = 'block'; 
         });
     </script>
 </body>

@@ -1,5 +1,5 @@
 <?php
-
+session_start(); // Start the session to use session variables
 require "../load.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input
     if (empty($email) || empty($password)) {
-        echo "Email or password not filled in.";
+        $_SESSION['error_message'] = "Email or password not filled in.";
+        header("Location: login.php"); 
         exit();
     }
 
@@ -29,27 +30,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $result->fetch_assoc();
         }
 
-        // Debugging user data
         if ($user) {
-            echo "User found: " . print_r($user, true); // Debugging
+            // Check password
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['success_message'] = "You have logged in successfully!";
+                header("Location: uservalidated.php?id=" . $user['id']);
+                exit();
+            } else {
+                $_SESSION['error_message'] = "Invalid email or password.";
+                header("Location: login.php"); // Redirect back to login page
+                exit();
+            }
         } else {
-            echo "No user found with this email.";
+            $_SESSION['error_message'] = "No user found with this email.";
+            header("Location: login.php"); // Redirect back to login page
             exit();
-        }
-
-        // Check password
-        if (password_verify($password, $user['password'])) {
-            echo "Password verified successfully"; // Debugging
-            header("Location: uservalidated.php?id=" . $user['id']);
-            exit();
-        } else {
-            echo "Password entered: " . $password . "<br>";
-            echo "Stored hash: " . $user['password'] . "<br>";
-            echo "Invalid email or password.";
         }
 
     } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+        $_SESSION['error_message'] = "Error: " . $e->getMessage();
+        header("Location: login.php"); // Redirect back to login page
+        exit();
     }
 }
 ?>
