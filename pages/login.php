@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to access session variables
+session_start(); 
 require "../load.php";
 ?>
 
@@ -38,14 +38,10 @@ require "../load.php";
         .topnav a:hover {
             color: whitesmoke;
         }
-        .topnav-right {
-            float: right;
-            text-align: right;
-        }
         body {
             background-color: azure;
         }
-        /* Loading spinner styles */
+       
         #loadingSpinner {
             display: none;
             position: fixed;
@@ -53,7 +49,9 @@ require "../load.php";
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            transition: 5s;
+           border-style: none;
+           border-radius: 5px;
+          
         }
     </style>
     <div class="topnav">
@@ -72,6 +70,7 @@ require "../load.php";
                     <div class="alert alert-danger"><?php echo $_SESSION['error_message']; ?></div>
                     <?php unset($_SESSION['error_message']); ?>
                 <?php endif; ?>
+
                 <form id="loginForm" method="POST" action="validate.php">
                     <div class="form-outline mb-4">
                         <label class="form-label" for="email">Email address</label>
@@ -119,7 +118,6 @@ require "../load.php";
         </div>
     </div>
 
-   
     <div id="loadingSpinner" class="text-center">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -139,13 +137,14 @@ require "../load.php";
             eyeIcon.classList.toggle('bi-eye-slash');
         });
 
-        // Show loading 
+       
         const loginForm = document.getElementById('loginForm');
         const loadingSpinner = document.getElementById('loadingSpinner');
 
         loginForm.addEventListener('submit', function () {
             loadingSpinner.style.display = 'block'; 
         });
+        
     </script>
 </body>
 </html>

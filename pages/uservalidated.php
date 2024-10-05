@@ -2,7 +2,7 @@
 
 require "../load.php";
 
-// Check if the user ID is provided in the URL
+session_start();
 if (isset($_GET['id'])) {
     $user_id = $_GET['id'];
 
@@ -35,6 +35,41 @@ if (isset($_GET['id'])) {
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <title>User Details</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+            
+                <style>
+                     .success-message {
+                        border: 2px solid #28a745;
+                        background-color: #d4edda; 
+                        color: #155724; 
+                        padding: 10px;
+                        border-radius: 5px;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                        margin-left: 360px;
+                        margin-right:360px ;
+                       text-align: center;
+                       transition-duration: 2s;
+                       
+                       
+                    }
+                </style>
+
+                 <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="success-message" id="success-message"><?php echo $_SESSION['success_message']; ?></div>
+                    <?php unset($_SESSION['success_message']);?>
+                    <script>
+                            window.onload = function() {
+                                const message = document.getElementById('success-message');
+                                if (message) {
+                                    setTimeout(() => {
+                                        message.style.display = 'none'; 
+                                    }, 2000); 
+                                }
+                            }
+                    </script>
+                <?php endif; ?>
+                
+
             </head>
             <body>
                 <div class="container mt-5">
@@ -90,7 +125,7 @@ if (isset($_GET['id'])) {
         <?php
     }
 } else {
-    // If no user ID is provided
+    // If no user ID 
     ?>
     <div class="container mt-5">
         <p class="alert alert-warning">No user ID provided.</p>
