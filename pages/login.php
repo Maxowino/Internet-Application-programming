@@ -39,7 +39,7 @@ require "../load.php";
             color: whitesmoke;
         }
         body {
-            background-color: azure;
+            background-color: grey;
         }
        
         #loadingSpinner {
