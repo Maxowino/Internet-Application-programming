@@ -103,13 +103,13 @@ require "../load.php";
                         <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
                         <p>Not yet registered? <span id="registerText" style="color: blue; cursor: pointer; text-decoration:none;">Register</span></p>
                         <p>or Log-in with:</p>
-                        <button type="button" class="btn btn-link btn-floating mx-1">
+                        <button type="button" class="btn btn-link btn-floating mx-1" style="color: black;">
                             <i class="bi bi-facebook"></i>
                         </button>
-                        <button type="button" class="btn btn-link btn-floating mx-1">
+                        <button type="button" class="btn btn-link btn-floating mx-1" style="color: black;">
                             <i class="bi bi-google"></i>
                         </button>
-                        <button type="button" class="btn btn-link btn-floating mx-1">
+                        <button type="button" class="btn btn-link btn-floating mx-1" style="color: black;">
                             <i class="bi bi-github"></i>
                         </button>
                     </div>
