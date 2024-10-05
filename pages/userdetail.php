@@ -42,7 +42,7 @@ require "../load.php";
 
                         // Check if user data was found
                         if ($user) {
-                            // Display the user's details in a table
+                            // Display the user details 
                             ?>
                             <!doctype html>
                             <html lang="en">
@@ -88,7 +88,7 @@ require "../load.php";
                             echo "User not found.";
                         }
                     } catch (Exception $e) {
-                        // Handle errors during query execution
+                        // Handle errors 
                         echo "Error: " . $e->getMessage();
                     }
                     ?>
