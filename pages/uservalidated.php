@@ -1,12 +1,13 @@
 <?php
-
 require "../load.php";
 
 session_start();
-if (isset($_GET['id'])) {
+
+// Check if user ID is provided
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $user_id = $_GET['id'];
 
-    // Connect to the database
+    // Initialize database connection
     $conn = new dbconnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
     $connection = $conn->getConnection();
 
@@ -26,7 +27,7 @@ if (isset($_GET['id'])) {
         }
 
         if ($user) {
-            // Display the user's details in a table
+            // Display the user details
             ?>
             <!doctype html>
             <html lang="en">
@@ -35,105 +36,81 @@ if (isset($_GET['id'])) {
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <title>User Details</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-            
                 <style>
-                     .success-message {
+                    .success-message {
                         border: 2px solid #28a745;
-                        background-color: #d4edda; 
-                        color: #155724; 
+                        background-color: #d4edda;
+                        color: #155724;
                         padding: 10px;
                         border-radius: 5px;
-                        margin-top: 20px;
-                        margin-bottom: 20px;
-                        margin-left: 360px;
-                        margin-right:360px ;
-                       text-align: center;
-                       transition-duration: 2s;
-                       
-                       
+                        margin: 20px auto;
+                        text-align: center;
+                        width: 50%;
+                        transition: opacity 2s ease-in-out;
                     }
                 </style>
-
-                 <?php if (isset($_SESSION['success_message'])): ?>
-                    <div class="success-message" id="success-message"><?php echo $_SESSION['success_message']; ?></div>
-                    <?php unset($_SESSION['success_message']);?>
+                <?php if (isset($_SESSION['success_message'])): ?>
                     <script>
-                        //function to remove the message after 2sec
-                            window.onload = function() {
-                                const message = document.getElementById('success-message');
-                                if (message) {
-                                    setTimeout(() => {
-                                        message.style.display = 'none'; 
-                                    }, 2000); 
-                                }
+                        window.onload = function () {
+                            const message = document.getElementById('success-message');
+                            if (message) {
+                                setTimeout(() => {
+                                    message.style.opacity = '0';
+                                }, 2000);
+                                setTimeout(() => {
+                                    message.remove();
+                                }, 4000);
                             }
+                        };
                     </script>
                 <?php endif; ?>
-                
-
             </head>
             <body>
-                <div class="container mt-5">
-                    <h1 class="text-center">User Details</h1>
-                    <table class="table table-striped table-bordered mt-4">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">Field</th>
-                                <th scope="col">Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>First Name</strong></td>
-                                <td><?php echo htmlspecialchars($user['first_name']); ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Last Name</strong></td>
-                                <td><?php echo htmlspecialchars($user['last_name']); ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Email</strong></td>
-                                <td><?php echo htmlspecialchars($user['email']); ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-center mt-4">
-                        <a href="login.php" class="btn btn-danger">Logout</a>
+            <div class="container mt-5">
+                <h1 class="text-center">User Details</h1>
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="success-message" id="success-message">
+                        <?php echo $_SESSION['success_message']; unset($_SESSION['success_message']); ?>
                     </div>
+                <?php endif; ?>
+                <table class="table table-striped table-bordered mt-4">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Field</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>First Name</strong></td>
+                            <td><?php echo htmlspecialchars($user['first_name']); ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Last Name</strong></td>
+                            <td><?php echo htmlspecialchars($user['last_name']); ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center mt-4">
+                    <a href="update.php?id=<?php echo $user_id; ?>" class="btn btn-primary">Update</a>
+                    <a href="login.php" class="btn btn-danger">Logout</a>
                 </div>
-
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
             </body>
             </html>
             <?php
         } else {
-            // If user not found
-            ?>
-            <div class="container mt-5">
-                <p class="alert alert-warning">User not found.</p>
-                <div class="text-center mt-4">
-                    <a href="login.php" class="btn btn-danger">Logout</a>
-                </div>
-            </div>
-            <?php
+            echo '<div class="container mt-5"><p class="alert alert-warning">User not found.</p></div>';
         }
     } catch (Exception $e) {
-        // If there is an error
-        ?>
-        <div class="container mt-5">
-            <p class="alert alert-danger">Error: <?php echo $e->getMessage(); ?></p>
-        </div>
-        <?php
+        echo '<div class="container mt-5"><p class="alert alert-danger">Error: ' . $e->getMessage() . '</p></div>';
     }
 } else {
-    // If no user ID 
-    ?>
-    <div class="container mt-5">
-        <p class="alert alert-warning">No user ID provided.</p>
-        <div class="text-center mt-4">
-            <a href="login.php" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-    <?php
+    echo '<div class="container mt-5"><p class="alert alert-warning">No user ID provided.</p></div>';
 }
 ?>

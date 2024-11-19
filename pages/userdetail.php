@@ -92,7 +92,10 @@ require "../load.php";
                         echo "Error: " . $e->getMessage();
                     }
                     ?>
+        <div class="container mt-5">
             <a href="login.php" class="btn btn-danger">Logout</a>
+            <a href="update.php?id=<?php echo $user_id; ?>" class="btn btn-primary">Update</a>
+        </div>
             </div>
         </body>
         <?

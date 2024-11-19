@@ -13,6 +13,48 @@ require "../load.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <style>
+         #drawer {
+            height: 50%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: black;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;       
+        }
+
+        #drawer a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+           
+        }
+
+        #drawer a:hover {
+            color: #f1f1f1;
+        }
+
+        #drawer .closebtn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        .topnav .icon {
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            padding: 14px 16px;
+            position: absolute; /* Positioning it at the top-left of the navbar */
+            right:0;
+            top: 0;
+        }
         .form-container {
             background-color: burlywood; 
             padding: 30px; 
@@ -26,6 +68,7 @@ require "../load.php";
         .topnav {
             background-color: black;
             overflow: hidden;
+            position: relative;
         }
         .topnav a {
             color: azure;
@@ -59,6 +102,14 @@ require "../load.php";
         <a href="../about.php">About</a>
         <a href="">Projects</a>
         <a href="">Contact</a>
+
+        <a href="javascript:void(0)" class="icon" onclick="openDrawer()">
+            <i class="bi bi-three-dots-vertical" style="color:white; font-size: 25px;"></i>
+        </a>
+    </div>
+    <div id="drawer">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeDrawer()">×</a>
+        <a href="adminlogin.php">Admin Page</a>
     </div>
 </head>
 <body class="sign">
@@ -148,6 +199,14 @@ require "../load.php";
     registerText.addEventListener('click', function() {
         window.location.href = 'signin.php'; 
     });
+
+    function openDrawer() {
+            document.getElementById('drawer').style.width = '250px';
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer').style.width = '0';
+        }
         
     </script>
 </body>
